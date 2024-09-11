@@ -1,0 +1,35 @@
+use crate::{
+    // movement::character_controller::CharacterControllerBundle,
+    player_control::actions::{
+        create_player_action_input_manager_bundle, create_ui_action_input_manager_bundle,
+    },
+    AppState,
+};
+use bevy::prelude::*;
+use bevy_rapier3d::prelude::Group;
+use serde::{Deserialize, Serialize};
+
+pub(crate) const HEIGHT: f32 = 0.3; //0.4
+pub(crate) const RADIUS: f32 = 0.4; //0.3;
+
+#[derive(Debug, Clone, Eq, PartialEq, Component, Reflect, Serialize, Deserialize, Default)]
+#[reflect(Component, Serialize, Deserialize)]
+pub(crate) struct Player;
+
+pub(super) fn plugin(app: &mut App) {
+    app.register_type::<Player>()
+        .add_systems(Update, spawn.run_if(in_state(AppState::Playing)));
+}
+
+fn spawn(player: Query<(Entity, &Transform), Added<Player>>, mut commands: Commands) {
+    for (entity, transform) in player.iter() {
+        // let mut controller = CharacterControllerBundle::capsule(HEIGHT, RADIUS, transform.scale.y);
+        // controller.collision_layers.memberships |= Group::GROUP_1; //CollisionLayer::Player;
+
+        // commands.entity(entity).insert((
+        //     controller,
+        //     create_player_action_input_manager_bundle(),
+        //     create_ui_action_input_manager_bundle(),
+        // ));
+    }
+}
