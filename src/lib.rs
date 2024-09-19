@@ -10,6 +10,8 @@ pub mod robot_vis;
 pub mod scene;
 pub mod util;
 
+pub mod engine;
+
 pub struct SimPlugin;
 
 
